@@ -26,18 +26,26 @@ public class Program {
             System.out.println("=======================");
             System.out.println();
 
-            System.out.println();
-            System.out.println("Entre com a data, para atualizar a reserva: ");
-            System.out.print("Data de Check-in (dd/MM/yyyy): ");
-            checkIn = sdf.parse(sc.next());
-            System.out.print("Data de Check-Out (dd/MM/yyyy): ");
-            checkOut = sdf.parse(sc.next());
+            System.out.print("Atualizar reserva? S/N: ");
+            String sn = sc.next();
+            sn.toLowerCase();
+            if (sn.equals("s")) {
+                System.out.println("Entre com a data, para atualizar a reserva: ");
+                System.out.print("Data de Check-in (dd/MM/yyyy): ");
+                checkIn = sdf.parse(sc.next());
+                System.out.print("Data de Check-Out (dd/MM/yyyy): ");
+                checkOut = sdf.parse(sc.next());
 
-            reservation.updateDates(checkIn, checkOut);
-            System.out.println("Reserva: " + reservation);
+                reservation.updateDates(checkIn, checkOut);
+                System.out.println("Reserva: " + reservation);
+            } else {
+                System.out.println("Reserva: " + reservation);
+            }
+
+
         } catch (ParseException e) {
             System.out.println("Formato de data inválida.");
-        } catch (DomainException e){
+        } catch (DomainException e) {
             System.out.println("Erro na reserva: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Erro inesperado.");
