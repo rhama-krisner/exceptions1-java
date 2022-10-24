@@ -35,13 +35,24 @@ public class Reservation {
     }
 
     public long duration(){
-        long dif = checkOut.getTime() - checkIn.getTime();
-        return TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
+        long diff = checkOut.getTime() - checkIn.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-    public void updateDates(Date checkIn, Date checkOut){
+    public String updateDates(Date checkIn, Date checkOut){
+
+        Date now = new Date();
+        if (checkIn.before(now) || checkOut.before(now)) {
+            return "Erro na reserva: As datas para reservas devem ser datas futuras";
+        }
+        if (!checkOut.after(checkIn)) {
+            return "Erro na reserva: Data de check-out anterior à data de check-in";
+        }
+
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+        return null;
+
     }
 
     @Override

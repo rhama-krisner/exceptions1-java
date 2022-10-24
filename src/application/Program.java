@@ -27,33 +27,24 @@ public class Program {
             System.out.println("=======================");
             System.out.println();
 
-            System.out.print("Atualizar reserva? s/n: ");
-            String sn = sc.next();
-            sn.toLowerCase();
-            if (sn.equals("s")) {
-                System.out.println();
-                System.out.println("Entre com a data, para atualizar a reserva: ");
-                System.out.print("Data de Check-in (dd/MM/yyyy): ");
-                checkIn = sdf.parse(sc.next());
-                System.out.print("Data de Check-Out (dd/MM/yyyy): ");
-                checkOut = sdf.parse(sc.next());
+            System.out.println();
+            System.out.println("Entre com a data, para atualizar a reserva: ");
+            System.out.print("Data de Check-in (dd/MM/yyyy): ");
+            checkIn = sdf.parse(sc.next());
+            System.out.print("Data de Check-Out (dd/MM/yyyy): ");
+            checkOut = sdf.parse(sc.next());
 
-                Date now = new Date();
-                if (checkIn.before(now) || checkOut.after(now)) {
-                    System.out.println("Erro na reserva: As datas para reservas devem ser datas futuras");
-                } else if (!checkOut.after(checkIn)) {
-                    System.out.println("Erro na reserva: Data de check-out anterior à data de check-in");
-                } else {
-                    reservation.updateDates(checkIn, checkOut);
-                    System.out.println("Reserva: " + reservation);
-                    System.out.println("=======================");
-                    System.out.println("Reserva confirmada");
-                }
+            String error = reservation.updateDates(checkIn, checkOut);
+            if (error != null) {
+                System.out.println("Erro na reserva: " + error);
             } else {
-                System.out.println("Reserva confirmada");
+                System.out.println("Reserva: " + reservation);
+                System.out.println("=========================");
+                System.out.println("Reserva confirmada.");
             }
         }
 
 
     }
 }
+
